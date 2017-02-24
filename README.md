@@ -9,8 +9,8 @@ $ go run battle.go ; cat output.txt
 Starting game...
 Game over, thanks for playing :)
 Player 1
-O O _ _ _
-_ B O _ _
+O _ _ _ _
+_ X O _ _
 B _ _ X _
 _ _ _ _ B
 _ _ _ X _
@@ -23,7 +23,7 @@ B O _ _ B
 _ X _ O _
 
 P1:3
-P2:2
+P2:3
 It is a draw
 ```
 

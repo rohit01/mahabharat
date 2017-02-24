@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/rohit01/mahabharat/internal"
+	"time"
 )
 
 func main() {
@@ -22,6 +23,7 @@ func main() {
 	fmt.Println("Starting game...")
 	player2.Turn <- struct{}{}
 	<-gameOver
+	time.Sleep(100 * time.Millisecond)
 
 	result := ""
 	if player1.Winner {
