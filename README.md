@@ -3,17 +3,11 @@ Mahabharat
 
 A ancient era game of battleships written in go.
 
-Sample run:
+Sample Run #1
 ```
-$ go run battle.go
+$ go run battle.go ; cat output.txt
 Starting game...
 Game over, thanks for playing :)
-$
-```
-
-Result:
-```
-$ cat output.txt
 Player 1
 O O _ _ _
 _ B O _ _
@@ -31,6 +25,54 @@ _ X _ O _
 P1:3
 P2:2
 It is a draw
+```
+
+Sample Run #2 (different moves by player #1)
+```
+$ go run battle.go ; cat output.txt
+Starting game...
+Game over, thanks for playing :)
+Player 1
+O O _ _ _
+_ B O _ _
+B _ _ X _
+_ _ _ _ B
+_ _ _ X _
+
+Player 2
+_ X _ _ _
+_ _ _ _ _
+_ _ _ X _
+B _ _ _ X
+_ X _ O _
+
+P1:4
+P2:2
+Player 1 wins
+```
+
+Sample Run #3 (different moves by player #1)
+```
+$ go run battle.go ; cat output.txt
+Starting game...
+Game over, thanks for playing :)
+Player 1
+O O _ _ _
+_ B O _ _
+B _ _ X _
+_ _ _ _ B
+_ _ _ X _
+
+Player 2
+_ X _ _ _
+_ _ _ _ _
+_ _ _ X _
+X _ _ _ X
+_ X _ _ _
+
+P1:5
+P2:2
+Player 1 wins
 $
 ```
 
