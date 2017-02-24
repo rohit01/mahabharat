@@ -22,13 +22,15 @@ type (
 	}
 )
 
-func (self *Player) Print() {
+func (self *Player) GroundStatus() string {
+	groundStatus := ""
 	for rowNumber := range self.battleGround {
 		for columnNumber := range self.battleGround[rowNumber] {
-			fmt.Printf("%v ", self.battleGround[rowNumber][columnNumber])
+			groundStatus = fmt.Sprintf("%v%v ", groundStatus, self.battleGround[rowNumber][columnNumber])
 		}
-		fmt.Print("\n")
+		groundStatus = fmt.Sprintf("%v\n", groundStatus)
 	}
+	return groundStatus
 }
 
 func (self *Player) BombedAt(x, y int) (bool, error) {
