@@ -15,6 +15,11 @@ type (
 		Hits         int
 		battleGround []([]string)
 	}
+
+	Position struct {
+		X int
+		Y int
+	}
 )
 
 func (self *Player) Print() {
@@ -50,7 +55,7 @@ func (self *Player) AllShipsDestroyed() bool {
 	return true
 }
 
-func New(name string, gridSize int, positions string) (*Player, error) {
+func New(name string, gridSize int, shipPositions string) (*Player, error) {
 	if gridSize <= 0 {
 		return nil, errors.New("Grid Size must be a positive integer")
 	}
@@ -64,17 +69,29 @@ func New(name string, gridSize int, positions string) (*Player, error) {
 		}
 	}
 	// Process input positions
-	for _, shipPosition := range strings.Split(positions, ",") {
-		position := strings.Split(shipPosition, ":")
-		x, err := strconv.ParseInt(position[0], 10, 64)
-		if err != nil {
-			return nil, fmt.Errorf("Invalid position data: %v", positions)
-		}
-		y, err := strconv.ParseInt(position[1], 10, 64)
-		if err != nil {
-			return nil, fmt.Errorf("Invalid position data: %v", positions)
-		}
-		player.battleGround[x][y] = "B"
+	initialPositions, err := ParseGridString(shipPositions)
+	if err != nil {
+		return nil, err
+	}
+	for _, position := range initialPositions {
+		player.battleGround[position.X][position.Y] = "B"
 	}
 	return player, nil
+}
+
+func ParseGridString(gridString string) (moves []Position, err error) {
+	moves = make([]Position, 0)
+	for _, position := range strings.Split(gridString, ",") {
+		xyPosition := strings.Split(position, ":")
+		x, err := strconv.ParseInt(xyPosition[0], 10, 64)
+		if err != nil {
+			return nil, fmt.Errorf("Invalid grid position data: %v", gridString)
+		}
+		y, err := strconv.ParseInt(xyPosition[1], 10, 64)
+		if err != nil {
+			return nil, fmt.Errorf("Invalid grid position data: %v", gridString)
+		}
+		moves = append(moves, Position{int(x), int(y)})
+	}
+	return moves, nil
 }
