@@ -28,6 +28,10 @@ func main() {
 		result = "Player 1 wins"
 	} else if player2.Winner {
 		result = "Player 2 wins"
+	} else if player1.Hits > player2.Hits {
+		result = "Player 1 wins"
+	} else if player2.Hits > player1.Hits {
+		result = "Player 2 wins"
 	} else {
 		result = "It is a draw"
 	}
