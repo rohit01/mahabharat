@@ -1,4 +1,4 @@
-// Module to test play
+// Module to test input module
 
 package internal
 
