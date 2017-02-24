@@ -37,7 +37,7 @@ func (self *Player) GroundStatus() string {
 	return groundStatus
 }
 
-func (self *Player) Bomb(position CoOrdinates) (bool, error) {
+func (self *Player) bomb(position CoOrdinates) (bool, error) {
 	if (position.X >= len(self.battleGround)) || (position.Y >= len(self.battleGround)) {
 		return false, fmt.Errorf("Missile attacked (at %v,%v) beyond the grid length: %v",
 			position.X, position.Y, len(self.battleGround))
@@ -66,7 +66,13 @@ func (self *Player) Attack(ctx context.Context, opponent *Player, gameOver chan 
 	for _, position := range self.AttackMoves {
 		select {
 		case <-self.Turn:
-			opponent.Bomb(position)
+			hit, err := opponent.bomb(position)
+			if err != nil {
+				panic(err)
+			}
+			if hit {
+				self.Hits += 1
+			}
 			if opponent.AllShipsDestroyed() {
 				self.Winner = true
 				gameOver <- struct{}{}
